@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LineAge — Arquitectura de Memoria</title>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="loader"><span>INICIANDO RITUAL...</span></div>
     <div id="cursor"></div>
     <div id="cursor-aura"></div>
@@ -30,7 +27,7 @@
     <main>
         <section id="home" class="view active">
             <div class="hero">
-                <h1 class="glitch">MEMORIA ETERNA</h1>
+                <h1>MEMORIA ETERNA</h1>
                 <p>Sintetizando el legado megalítico en la piel contemporánea.</p>
             </div>
         </section>
@@ -42,8 +39,7 @@
                     <input type="text" id="promptInput" placeholder="Describe tu visión ancestral...">
                     <button id="btnGenerate">SINTETIZAR</button>
                 </div>
-                <div id="visualizer-3d">
-                    </div>
+                <div id="visualizer-3d"></div>
             </div>
         </section>
 
@@ -59,7 +55,6 @@
             </div>
         </section>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
