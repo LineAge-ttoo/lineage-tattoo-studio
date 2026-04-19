@@ -1,98 +1,55 @@
 :root {
-    --bg-dark: #030303;
-    --stone-gray: #1a1a1b;
-    --accent-gold: #c5a059; /* Un toque de oro ancestral */
-    --white-bone: #f2f2f2;
+    --bg: #020202;
+    --gold: #c5a059;
+    --gold-dim: #5c4b2a;
+    --white: #f5f5f5;
+    --gray: #444;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow: hidden; cursor: none; }
 
-body {
-    background-color: var(--bg-dark);
-    /* Fondo con degradado que simula una linterna en la oscuridad */
-    background-image: 
-        radial-gradient(circle at 50% 50%, rgba(26, 26, 27, 0.8) 0%, rgba(3, 3, 3, 1) 80%),
-        url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Textura de grano fino */
-    color: var(--white-bone);
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
-    cursor: none;
-}
+/* Niebla Cinemática Mejorada */
+.fog-container { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.fog-layer { position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%); }
+.layer-1 { animation: fogFloat 120s linear infinite; top: -50%; left: -50%; }
+.layer-2 { animation: fogFloat 90s linear infinite reverse; opacity: 0.03; top: 0; }
+@keyframes fogFloat { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-10%, -10%) rotate(5deg); } }
 
-/* Efecto de Niebla en movimiento (San Agustín místico) */
-.fog-layer {
-    position: fixed;
-    top: 0; left: 0;
-    width: 200%; height: 100%;
-    background: url('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/terrain/grasslight-big.jpg');
-    opacity: 0.03;
-    mix-blend-mode: overlay;
-    animation: drift 60s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-}
+.vignette-ritual { position: fixed; inset: 0; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: 3; pointer-events: none; }
+.texture-overlay { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.1; z-index: 2; pointer-events: none; }
 
-@keyframes drift {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
+/* Cursor con Aura de Oro */
+#cursor { position: fixed; width: 4px; height: 4px; background: #fff; border-radius: 50%; z-index: 9999; pointer-events: none; }
+#cursor-aura { position: fixed; width: 40px; height: 40px; border: 1px solid var(--gold-dim); border-radius: 50%; z-index: 9998; pointer-events: none; transition: transform 0.1s ease; }
 
-/* Cursor mejorado (Representa un hallazgo de luz) */
-#cursor {
-    position: fixed;
-    width: 4px; height: 4px;
-    background: var(--white-bone);
-    border-radius: 50%;
-    z-index: 10000;
-    pointer-events: none;
-}
+/* UI de Navegación */
+nav { position: fixed; top: 0; width: 100%; padding: 40px; display: flex; justify-content: space-between; z-index: 100; align-items: center; }
+.nav-brand { font-family: 'Playfair Display'; letter-spacing: 6px; font-weight: bold; }
+.v-tag { font-size: 8px; vertical-align: super; color: var(--gold); }
+.nav-btn { background: none; border: none; color: var(--gray); margin-left: 20px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; }
+.nav-btn.active { color: var(--white); border-bottom: 1px solid var(--gold); }
 
-#cursor-aura {
-    position: fixed;
-    width: 50px; height: 50px;
-    border: 1px solid rgba(197, 160, 89, 0.3); /* Color oro tenue */
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
-    border-radius: 50%;
-    z-index: 9999;
-    pointer-events: none;
-}
+/* Vistas */
+.view { display: none; height: 100vh; width: 100%; justify-content: center; align-items: center; z-index: 10; padding: 40px; }
+.view.active { display: flex; animation: viewIn 1.5s ease; }
+@keyframes viewIn { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
 
-/* Tipografía de Lujo */
-.main-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 12vw, 9rem);
-    font-weight: 700;
-    letter-spacing: 20px;
-    text-align: center;
-    background: linear-gradient(to bottom, #fff 30%, #444 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-}
+/* Hero */
+.main-title { font-family: 'Playfair Display'; font-size: clamp(3rem, 10vw, 8rem); letter-spacing: 15px; background: linear-gradient(to bottom, #fff, #333); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.separator-gold { width: 60px; height: 1px; background: var(--gold); margin: 25px auto; }
 
-/* Estilo de los botones de navegación */
-nav {
-    position: fixed;
-    top: 0; width: 100%;
-    padding: 40px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
-    backdrop-filter: blur(5px);
-}
+/* Engine Layout Modular */
+.engine-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; width: 100%; align-items: center; }
+.engine-ui { text-align: left; }
+#visualizer-3d { width: 100%; height: 450px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); }
 
-.nav-btn {
-    background: none;
-    border: none;
-    color: #666;
-    letter-spacing: 3px;
-    font-size: 10px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.4s;
-}
+/* Narrativa */
+#narrative-box { margin-top: 30px; border-left: 1px solid var(--gold); padding-left: 20px; text-align: left; animation: fadeIn 2s ease; }
+#narrative-box h3 { font-size: 10px; letter-spacing: 3px; color: var(--gold); margin-bottom: 10px; }
+#narrative-box p { font-size: 13px; color: #888; line-height: 1.6; font-style: italic; }
 
-.nav-btn.active {
-    color: var(--accent-gold);
-    border-bottom: 1px solid var(--accent-gold);
-}
+.hidden { display: none; }
+input { background: transparent; border: none; border-bottom: 1px solid var(--gray); padding: 15px 0; color: white; width: 100%; margin-bottom: 25px; outline: none; font-size: 1rem; }
+button { background: var(--white); color: black; border: none; padding: 15px 30px; font-weight: bold; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+button:hover { background: var(--gold); }
