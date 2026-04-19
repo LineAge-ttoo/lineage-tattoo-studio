@@ -2,57 +2,69 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LineAge — Herencia de San Agustín</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LINEAGE — Digital Ritual System</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div id="loader"><span>SINTETIZANDO LEGADO...</span></div>
-    
-    <div class="fog-container">
-        <div class="fog-layer"></div>
-    </div>
     <canvas id="canvas-bg"></canvas>
-
-    <div id="cursor"></div>
-    <div id="cursor-aura"></div>
+    <div class="grain-overlay"></div>
 
     <nav>
-        <div class="nav-brand">LINEAGE</div>
-        <div class="nav-menu">
-            <button class="nav-btn active" data-section="home">Legado</button>
-            <button class="nav-btn" data-section="engine">El Templo</button>
+        <div class="nav-brand">LINEAGE <span class="version">v2.2</span></div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-section="hero">ORIGEN</button>
+            <button class="nav-btn" data-section="archive">ARCHIVO</button>
+            <button class="nav-btn" data-section="engine">TEMPLO</button>
         </div>
     </nav>
 
-    <main>
-        <section id="home" class="view active">
-            <div class="hero">
-                <h2 class="pre-title">ARCHAEOLOGICAL RITUAL</h2>
-                <h1 class="main-title">LINEAGE</h1>
-                <div class="separator"></div>
-                <p>La memoria de San Agustín tallada en la piel.</p>
+    <main id="smooth-wrapper">
+        <section id="hero" class="v-section active">
+            <div class="content">
+                <h2 class="label">MUSEO ARQUEOLÓGICO VIRTUAL</h2>
+                <h1 class="main-title">PIEL & PIEDRA</h1>
+                <p class="manifesto-brief">El tatuaje no es decoración. Es la arquitectura de tu memoria tallada en el presente.</p>
             </div>
         </section>
 
-        <section id="engine" class="view">
-            <div class="engine-card">
-                <h2>Generador Ancestral</h2>
-                <div class="input-group">
-                    <input type="text" id="promptInput" placeholder="Ej: Jaguar sagrado...">
-                    <button id="btnGenerate">SINTETIZAR</button>
+        <section id="archive" class="v-section">
+            <div class="archive-container">
+                <div class="search-module">
+                    <h3>CÓDICE DE ARQUETIPOS</h3>
+                    <input type="text" id="searchInput" placeholder="Buscar símbolo (Ej: Jaguar, Sol...)">
+                    <div id="searchResults" class="results-grid"></div>
                 </div>
-                <div id="visualizer-3d"></div>
+                
+                <div class="styles-module">
+                    <h3>MATRIZ DE ESTILOS LINEAGE</h3>
+                    <div id="stylesGrid" class="styles-grid">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="engine" class="v-section">
+            <div class="engine-container">
+                <div class="engine-header">
+                    <h3>GENERADOR ANCESTRAL</h3>
+                    <p id="selectedStyleDisplay">ESTILO ACTIVO: NINGUNO (Selecciona en el Archivo)</p>
+                </div>
+                <div class="input-ritual">
+                    <input type="text" id="promptInput" placeholder="EJ: Resiliencia del Jaguar">
+                    <button id="btnGenerate">INICIAR RITUAL</button>
+                </div>
+                <div id="result-display">
+                    <div id="visualizer-output"></div>
+                    <div id="hash-id"></div>
+                </div>
             </div>
         </section>
     </main>
 
+    <script src="lineage-memory.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
