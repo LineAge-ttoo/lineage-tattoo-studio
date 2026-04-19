@@ -3,58 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LineAge — Arquitectura de Memoria</title>
+    <title>LineAge — Herencia de San Agustín</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@200;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="loader"><span>INICIANDO RITUAL...</span></div>
-    <div id="cursor"></div>
+    
+    <div class="fog-layer"></div> <div id="cursor"></div>
     <div id="cursor-aura"></div>
     <canvas id="canvas-bg"></canvas>
 
     <nav>
-        <div class="nav-brand">LINEAGE</div>
+        <div class="nav-brand" style="letter-spacing: 5px;">LINEAGE</div>
         <div class="nav-menu">
-            <button class="nav-btn active" data-section="home">Inicio</button>
-            <button class="nav-btn" data-section="engine">Motor IA</button>
-            <button class="nav-btn" data-section="vip">Acceso VIP</button>
+            <button class="nav-btn active" data-section="home">Legado</button>
+            <button class="nav-btn" data-section="engine">El Templo</button>
+            <button class="nav-btn" data-section="vip">Ofrenda VIP</button>
         </div>
     </nav>
 
     <main>
         <section id="home" class="view active">
-            <div class="hero">
-                <h1>MEMORIA ETERNA</h1>
-                <p>Sintetizando el legado megalítico en la piel contemporánea.</p>
+            <div class="content">
+                <h1 class="main-title">LINEAGE</h1>
+                <p style="letter-spacing: 5px; color: #888; text-align: center; margin-top: -20px;">ESTUDIO ARQUEOLÓGICO DIGITAL</p>
             </div>
         </section>
-
+        
         <section id="engine" class="view">
-            <div class="engine-card">
-                <h2>Generador de Linaje</h2>
-                <div class="input-group">
-                    <input type="text" id="promptInput" placeholder="Describe tu visión ancestral...">
-                    <button id="btnGenerate">SINTETIZAR</button>
-                </div>
-                <div id="visualizer-3d"></div>
-            </div>
-        </section>
+            </section>
 
         <section id="vip" class="view">
-            <div class="vip-portal">
-                <span class="badge">NIVEL OBSIDIANA</span>
-                <h2>Afiliación Arqueológica</h2>
-                <p class="price">$5.00 <span>USD</span></p>
-                <div class="pay-grid">
-                    <button class="pay-btn digital">PAGO DIGITAL</button>
-                    <a href="https://wa.me/573000000000?text=ACCESO_VIP" class="pay-btn wa">WHATSAPP DIRECTO</a>
-                </div>
-            </div>
-        </section>
+            </section>
     </main>
+
     <script src="script.js"></script>
 </body>
 </html>
