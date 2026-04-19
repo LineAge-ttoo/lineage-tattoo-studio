@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LINEAGE — ANCESTRAL TATTOO STUDIO</title>
+    <title>LINEAGE — ARQUITECTURA DIGITAL Y MEMORIA</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         /* =======================
-           VARIABLES DE SISTEMA
+           VARIABLES DE SISTEMA (LOCKED PALETTE)
         ======================= */
         :root {
-            --bg: #141416; /* Fondo más claro (gris azulado oscuro) */
-            --bg-card: #1c1c1e;
-            --fg: #f0f0f0;
-            --muted: #a0a0a0;
-            --line: rgba(255, 255, 255, 0.15);
-            --accent: #e5e5e5;
+            --black-deep: #050505;
+            --gray-charcoal: #111111;
+            --gray-stone: #2a2a2a;
+            --gray-fog: #b0b0b0;
+            --white-bone: #f5f5f5;
+            --line-grid: rgba(245, 245, 245, 0.08);
+            --blur-overlay: blur(12px);
         }
 
         * {
@@ -27,35 +28,39 @@
             scroll-behavior: smooth;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #666; }
+        ::selection {
+            background: var(--gray-stone);
+            color: var(--white-bone);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--black-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-stone); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-fog); }
 
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--fg);
-            background-color: var(--bg);
+            color: var(--gray-fog);
+            background-color: var(--black-deep);
             overflow-x: hidden;
             position: relative;
+            line-height: 1.6;
         }
 
         /* =======================
-           FONDO ANIMADO LINEAGE
+           FONDO RITUAL / TEXTURAS
         ======================= */
-        /* Contenedor de la animación para no afectar el resto de la página */
         .animated-bg {
             position: fixed;
             inset: 0;
             z-index: -3;
             overflow: hidden;
-            background: radial-gradient(circle at center, #222 0%, #0a0a0c 100%);
+            background: radial-gradient(circle at 50% 50%, var(--gray-charcoal) 0%, var(--black-deep) 100%);
         }
 
-        /* Formas geométricas giratorias */
         .shape {
             position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(176, 176, 176, 0.03);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -71,7 +76,6 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Capa de textura de piedra más visible */
         body::before {
             content: "";
             position: fixed;
@@ -79,49 +83,78 @@
             background-image: url("https://images.unsplash.com/photo-1604085572504-a392ddf0d86c");
             background-size: cover;
             background-position: center;
-            opacity: 0.15; /* Opacidad aumentada para que se note más */
-            filter: grayscale(100%) contrast(120%);
+            opacity: 0.08; 
+            filter: grayscale(100%) contrast(150%);
             pointer-events: none;
             z-index: -2;
             mix-blend-mode: overlay;
         }
 
         /* =======================
-           NAVEGACIÓN
+           NAVEGACIÓN GLOBAL
         ======================= */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 5%;
+            padding: 24px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--line);
+            backdrop-filter: var(--blur-overlay);
+            -webkit-backdrop-filter: var(--blur-overlay);
+            border-bottom: 1px solid var(--line-grid);
             z-index: 1000;
+            background: rgba(5, 5, 5, 0.7);
         }
 
         nav h1 {
             font-family: 'Playfair Display', serif;
-            letter-spacing: 5px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: var(--accent);
+            letter-spacing: 6px;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--white-bone);
         }
 
         nav a {
-            color: var(--muted);
+            color: var(--gray-fog);
             text-decoration: none;
-            margin-left: 30px;
-            font-size: 11px;
+            margin-left: 40px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            transition: color 0.3s;
+            letter-spacing: 4px;
+            transition: color 0.4s ease;
         }
 
-        nav a:hover { color: var(--accent); }
+        nav a:hover { color: var(--white-bone); }
+
+        /* =======================
+           COMPONENTES ESTRUCTURALES
+        ======================= */
+        .section-wrapper {
+            padding: 140px 5%;
+            max-width: 1200px;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .section-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            color: var(--white-bone);
+            border-left: 2px solid var(--gray-stone);
+            padding-left: 30px;
+            font-weight: 400;
+        }
 
         /* =======================
            HERO SECTION
@@ -134,183 +167,220 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            opacity: 0;
+            animation: fadeInHero 2s ease forwards 0.5s;
+        }
+
+        @keyframes fadeInHero {
+            to { opacity: 1; }
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            letter-spacing: -2px;
-            text-shadow: 0 5px 20px rgba(255,255,255,0.1);
-            margin-bottom: 20px;
+            font-size: clamp(3.5rem, 12vw, 10rem);
+            letter-spacing: -4px;
+            color: var(--white-bone);
+            margin-bottom: 24px;
+            font-weight: 400;
         }
 
-        .hero p {
-            max-width: 600px;
-            color: var(--fg);
-            line-height: 1.8;
-            font-weight: 300;
-            font-size: 1.1rem;
-            background: rgba(0,0,0,0.4);
-            padding: 15px 25px;
-            border-radius: 8px;
-            border: 1px solid var(--line);
+        .hero h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: var(--gray-fog);
+            margin-bottom: 40px;
         }
 
         /* =======================
-           SECCIONES GENERALES
+           MANIFIESTO
         ======================= */
-        section {
-            padding: 120px 5%;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+        .manifesto-text {
             font-family: 'Playfair Display', serif;
-            letter-spacing: 1px;
-            border-left: 3px solid var(--accent);
-            padding-left: 20px;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            line-height: 1.8;
+            color: var(--gray-fog);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
         }
+        .manifesto-text em { color: var(--white-bone); font-style: italic; }
 
-        .search-box { width: 100%; margin-bottom: 40px; }
+        /* =======================
+           GALERÍA (ARCHIVO)
+        ======================= */
+        .search-box { width: 100%; margin-bottom: 50px; }
         .search-box input {
             width: 100%;
-            padding: 16px 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--line);
-            border-radius: 4px;
-            color: var(--accent);
+            padding: 20px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--gray-stone);
+            color: var(--white-bone);
             font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             outline: none;
+            transition: border-color 0.3s ease;
         }
+        .search-box input:focus { border-bottom-color: var(--gray-fog); }
 
-        /* =======================
-           GRID Y TARJETAS
-        ======================= */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
 
         .card {
-            background: rgba(20, 20, 22, 0.85);
-            border: 1px solid var(--line);
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+            background: transparent;
+            transition: opacity 0.4s ease;
             cursor: pointer;
-            backdrop-filter: blur(5px);
         }
 
-        .grid:hover .card:not(:hover) { opacity: 0.5; filter: blur(2px); }
-        .card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.4); }
+        .grid:hover .card:not(:hover) { opacity: 0.3; }
+
+        .image-wrapper {
+            overflow: hidden;
+            border: 1px solid var(--line-grid);
+            margin-bottom: 20px;
+        }
 
         .card img {
             width: 100%;
-            height: 200px;
+            height: 350px;
             object-fit: cover;
-            border-radius: 4px;
-            filter: grayscale(80%);
-            transition: filter 0.4s;
+            filter: grayscale(100%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
         }
 
-        .card:hover img { filter: grayscale(20%); }
-        .card h3 { margin-top: 15px; font-family: 'Playfair Display', serif; }
-        .card p { color: var(--muted); font-size: 13px; margin-top: 8px; line-height: 1.5; }
+        .card:hover img { 
+            transform: scale(1.05); 
+            filter: grayscale(40%); 
+        }
+
+        .card h3 { 
+            font-family: 'Inter', sans-serif; 
+            font-weight: 300; 
+            font-size: 14px; 
+            color: var(--white-bone); 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .card p { color: var(--gray-fog); font-size: 12px; margin-top: 10px; line-height: 1.6; }
 
         /* =======================
-           MOTOR GENERATIVO (Engine)
+           ENGINE GENERATIVO
         ======================= */
         .engine {
-            background: rgba(15, 15, 17, 0.8);
-            padding: 60px;
-            border-radius: 8px;
-            border: 1px solid var(--line);
-            backdrop-filter: blur(10px);
+            background: var(--gray-charcoal);
+            padding: 80px;
+            border: 1px solid var(--gray-stone);
+            position: relative;
+            overflow: hidden;
         }
 
-        .engine-form { display: flex; flex-direction: column; gap: 15px; max-width: 600px; }
+        .engine-form { display: flex; flex-direction: column; gap: 24px; max-width: 700px; }
 
         .engine input, .engine select {
             width: 100%;
-            padding: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--line);
-            color: var(--accent);
-            border-radius: 4px;
+            padding: 20px;
+            background: var(--black-deep);
+            border: 1px solid var(--gray-stone);
+            color: var(--white-bone);
             font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
             outline: none;
+            transition: border-color 0.3s ease;
         }
+        .engine input:focus, .engine select:focus { border-color: var(--gray-fog); }
 
         button {
-            padding: 16px;
-            background: var(--accent);
-            color: #000;
+            padding: 20px;
+            background: var(--white-bone);
+            color: var(--black-deep);
             border: none;
-            border-radius: 4px;
             font-weight: 600;
-            letter-spacing: 2px;
+            font-size: 11px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
+            transition: all 0.4s ease;
+            font-family: 'Inter', sans-serif;
         }
 
-        button:active { transform: scale(0.98); }
-        button:hover { background: #d4d4d4; }
+        button:hover { background: var(--gray-fog); }
+        button:disabled { background: var(--gray-stone); color: var(--gray-fog); cursor: not-allowed; }
 
-        /* Estilos para el contenedor de la imagen generada */
         #engineResult {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: rgba(0,0,0,0.3);
-            text-align: center;
-            display: none; 
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-stone);
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+
+        .hash-id {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--gray-fog);
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--black-deep);
+            padding: 8px 16px;
+            border: 1px dashed var(--gray-stone);
         }
 
         #generatedImage {
             width: 100%;
-            max-width: 400px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid var(--muted);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: none; /* Oculto hasta que cargue */
+            max-width: 512px;
+            display: none;
+            filter: grayscale(100%);
+            border: 1px solid var(--gray-stone);
         }
 
         /* =======================
-           HISTORIA Y FOOTER
+           SISTEMA VIP
         ======================= */
-        .history {
-            background: rgba(20, 20, 22, 0.7);
-            border-left: 2px solid var(--accent);
-            padding: 30px;
-            line-height: 2;
-            color: var(--fg);
-            font-size: 1.1rem;
-            backdrop-filter: blur(5px);
+        .vip-system {
+            border: 1px dashed var(--gray-stone);
+            padding: 60px;
+            text-align: center;
         }
 
-        .history p { margin-bottom: 15px; }
+        .vip-system h2 { font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 4px; color: var(--white-bone); margin-bottom: 20px; }
+        .vip-system input { width: 100%; max-width: 300px; text-align: center; margin-bottom: 20px; text-transform: uppercase;}
+        
+        #vipContent {
+            display: none;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray-stone);
+            color: var(--white-bone);
+        }
 
+        /* =======================
+           FOOTER
+        ======================= */
         footer {
             text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid var(--line);
-            color: var(--muted);
-            font-size: 11px;
-            letter-spacing: 2px;
-            background: rgba(10,10,12,0.9);
+            padding: 80px 20px;
+            border-top: 1px solid var(--gray-stone);
+            color: var(--gray-stone);
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: var(--black-deep);
         }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; padding: 15px; }
+            nav { flex-direction: column; gap: 15px; padding: 20px; }
             nav a { margin: 0 10px; }
-            .engine { padding: 30px; }
+            .engine { padding: 40px 20px; }
+            .section-wrapper { padding: 100px 5%; }
         }
     </style>
 </head>
@@ -326,155 +396,240 @@
     <nav>
         <h1>LINEAGE</h1>
         <div>
-            <a href="#styles">Estilos</a>
-            <a href="#engine">Motor</a>
-            <a href="#history">Historia</a>
+            <a href="#manifiesto">Filosofía</a>
+            <a href="#archivo">Archivo</a>
+            <a href="#engine">Sistema</a>
+            <a href="#vip">VIP</a>
         </div>
     </nav>
 
     <main>
         <header class="hero">
+            <h2>Arquitectura Viva</h2>
             <h1>LINEAGE</h1>
-            <p>
-                Estudio internacional de tatuaje inspirado en la piedra ancestral de San Agustín, Huila.<br>
-                Arte, memoria y geometría sobre la piel.
-            </p>
         </header>
 
-        <section id="styles">
-            <h2 class="title">Estilos de Tatuaje</h2>
+        <section id="manifiesto" class="section-wrapper">
+            <h2 class="title">Manifiesto</h2>
+            <p class="manifesto-text">
+                El tatuaje no es decoración, <em>es memoria</em>.<br>
+                El cuerpo humano no es un lienzo, <em>es arquitectura</em>.<br>
+                El símbolo no es una imagen, <em>es lenguaje ancestral</em>.<br><br>
+                San Agustín dicta la forma. La máquina escribe el código.
+            </p>
+        </section>
+
+        <section id="archivo" class="section-wrapper">
+            <h2 class="title">Archivo Monolítico</h2>
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Buscar estilo (ej. geometría, blackwork...)" autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Interrogar el archivo (ej. geometría, piedra, andino...)" autocomplete="off">
             </div>
             <div class="grid" id="styleGrid">
                 <div class="card" data-key="geometria sagrada lineas simbolo matematico">
-                    <img src="https://images.unsplash.com/photo-1608666311620-9f0d2d7b2f1b" alt="Geometría Sagrada"/>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1608666311620-9f0d2d7b2f1b" alt="Geometría Sagrada"/></div>
                     <h3>Geometría Sagrada</h3>
-                    <p>Estructura simbólica ancestral y equilibrio matemático perfecto.</p>
+                    <p>Estructura simbólica y equilibrio matemático.</p>
                 </div>
                 <div class="card" data-key="piedra san agustin ancestral esculturas huila">
-                    <img src="https://images.unsplash.com/photo-1604085572504-a392ddf0d86c" alt="Piedra de San Agustín"/>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1604085572504-a392ddf0d86c" alt="Piedra de San Agustín"/></div>
                     <h3>Piedra Ancestral</h3>
-                    <p>Inspirado en la textura y el misterio de las esculturas de San Agustín, Huila.</p>
+                    <p>Textura y misterio megalítico de San Agustín.</p>
                 </div>
                 <div class="card" data-key="blackwork oscuro tinta profunda minimal minimalista">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874" alt="Blackwork"/>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874" alt="Blackwork"/></div>
                     <h3>Blackwork</h3>
-                    <p>Contraste absoluto, identidad sólida y minimalismo en tinta oscura.</p>
+                    <p>Contraste absoluto y vacío controlado.</p>
                 </div>
                 <div class="card" data-key="flow organico energia movimiento andina naturaleza">
-                    <img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e" alt="Flow Orgánico"/>
-                    <h3>Flow Orgánico</h3>
-                    <p>Movimiento natural guiado por la energía de la cordillera andina.</p>
+                    <div class="image-wrapper"><img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e" alt="Flow Orgánico"/></div>
+                    <h3>Flujo Andino</h3>
+                    <p>Movimiento natural guiado por la topografía.</p>
                 </div>
             </div>
         </section>
 
-        <section id="engine">
+        <section id="engine" class="section-wrapper">
             <div class="engine">
-                <h2 class="title">Generative Engine</h2>
+                <h2 class="title">Motor Generativo ∞</h2>
                 <div class="engine-form">
-                    <input type="text" id="engineConcept" placeholder="Describe tu tatuaje (ej. Un jaguar místico)"/>
+                    <input type="text" id="engineConcept" placeholder="Concepto (ej. Cóndor en transición geométrica)"/>
                     <select id="engineStyle">
-                        <option value="Sacred geometry tattoo style, symmetrical, detailed lines">Geometría Sagrada</option>
-                        <option value="Stone texture tattoo design, ancient monolithic sculpture style, San Agustin ancient art">Piedra Ancestral</option>
-                        <option value="Blackwork tattoo style, solid black ink, high contrast minimalist">Blackwork</option>
-                        <option value="Organic flow tattoo design, smooth curves, nature energy, elegant">Flow Orgánico</option>
+                        <option value="Sacred geometry tattoo style, highly detailed thin black lines, symmetrical, minimalist, monochrome">Estructura Geométrica</option>
+                        <option value="Ancient stone texture tattoo design, San Agustin pre-columbian monolith style, rough lines, dark greyscale">Grabado Megalítico</option>
+                        <option value="Blackwork tattoo style, heavy solid black ink, high contrast, brutalist minimalism">Blackwork Brutalista</option>
+                        <option value="Organic flow tattoo design, smooth topography curves, andean nature energy, dark minimalist">Flujo Topográfico</option>
                     </select>
-                    <button id="generateBtn">Generar Diseño Real</button>
+                    <button id="generateBtn">Ejecutar Código Visual</button>
                     
                     <div id="engineResult">
-                        <p id="statusText" style="color: var(--muted);"></p>
-                        <img id="generatedImage" src="" alt="Diseño generado por IA">
+                        <div class="hash-id" id="hashIdDisplay">LINEAGE-ID: [PENDING]</div>
+                        <p id="statusText" style="color: var(--gray-fog); font-size: 14px; margin-bottom: 20px;"></p>
+                        <img id="generatedImage" src="" alt="Diseño de Tatuaje Generado">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="history">
-            <h2 class="title">Memoria de Piedra</h2>
-            <div class="history">
-                <p><strong>San Agustín, Huila</strong> es un territorio donde la piedra se convirtió en lenguaje.</p>
-                <p>Sus esculturas ancestrales no son simples objetos de adoración: son memoria viva de una civilización que pensaba a través de símbolos, observando las estrellas y la tierra.</p>
-                <p>En <em>LineAge</em>, traducimos ese antiguo lenguaje al arte del tatuaje, creando una continuidad entre el lienzo del cuerpo humano y la memoria pétrea del territorio andino.</p>
+        <section id="vip" class="section-wrapper">
+            <div class="vip-system">
+                <h2>CÍRCULO LINEAGE VIP</h2>
+                <p style="font-size: 12px; color: var(--gray-fog); margin-bottom: 20px;">Protocolo de acceso cerrado. Ingrese llave criptográfica.</p>
+                <input type="password" id="vipCode" placeholder="CÓDIGO DE ACCESO" />
+                <br>
+                <button id="vipBtn">Verificar</button>
+
+                <div id="vipContent">
+                    <h3 style="font-family: 'Playfair Display', serif; font-weight: 400;">Acceso Concedido: Nivel Obsidiana</h3>
+                    <p style="font-size: 13px; color: var(--gray-fog); margin-top: 15px;">
+                        El motor generativo operará ahora sin límites de token y con máxima prioridad de renderizado (Simulado). Las texturas de piedra han sido desbloqueadas en resolución 4K.
+                    </p>
+                </div>
             </div>
         </section>
+
     </main>
 
-    <footer>LINEAGE TATTOO STUDIO — ANCESTRAL SYSTEM © 2026</footer>
+    <footer>LINEAGE TATTOO SYSTEM ∞ | SAN AGUSTÍN, COLOMBIA | ABRIL 2026</footer>
 
     <script>
-        /* 1. FILTRO DE BÚSQUEDA */
-        const searchInput = document.getElementById("searchInput");
-        const cards = document.querySelectorAll("#styleGrid .card");
-
-        searchInput.addEventListener("input", function() {
-            const query = this.value.toLowerCase().trim();
-            cards.forEach(card => {
-                const keywords = card.getAttribute("data-key").toLowerCase();
-                if (keywords.includes(query)) {
-                    card.style.display = "block";
-                    setTimeout(() => card.style.opacity = "1", 10);
-                } else {
-                    card.style.opacity = "0";
-                    setTimeout(() => card.style.display = "none", 300);
-                }
-            });
-        });
-
-        /* 2. GENERADOR DE IMÁGENES REAL CON IA (Pollinations API) */
-        const generateBtn = document.getElementById("generateBtn");
-        const engineResult = document.getElementById("engineResult");
-        const statusText = document.getElementById("statusText");
-        const generatedImage = document.getElementById("generatedImage");
-        const engineConcept = document.getElementById("engineConcept");
-        const engineStyle = document.getElementById("engineStyle");
-
-        generateBtn.addEventListener("click", function() {
-            const concept = engineConcept.value.trim();
-            const stylePrompt = engineStyle.value;
-
-            if (concept === "") {
-                engineResult.style.display = "block";
-                statusText.innerHTML = "Por favor, ingresa un concepto para generar el diseño.";
-                generatedImage.style.display = "none";
-                return;
+        /**
+         * LINEAGE WEB SYSTEM ARCHITECT ∞ 
+         * Core Application Logic
+         */
+        class LineAgeSystem {
+            constructor() {
+                this.initScrollReveal();
+                this.initSearch();
+                this.initEngine();
+                this.initVipSystem();
             }
 
-            // Mostramos el contenedor y el texto de carga
-            engineResult.style.display = "block";
-            statusText.innerHTML = "Invocando ancestros digitales... Generando imagen real.";
-            generatedImage.style.display = "none";
-            generateBtn.disabled = true;
-            generateBtn.innerText = "Generando...";
+            // 1. SCROLL REVEAL (Ritual Inmersivo)
+            initScrollReveal() {
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
 
-            // Construimos el "Prompt" (las instrucciones para la IA)
-            // Codificamos el texto para que sea una URL válida
-            const fullPrompt = encodeURIComponent(`Tattoo design of ${concept}, ${stylePrompt}, isolated on white background, high quality, masterpiece`);
-            
-            // Usamos Pollinations.ai para generar la imagen
-            // Añadimos un número aleatorio al final para evitar que el navegador guarde la imagen en caché
-            const imageUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=512&height=512&nologo=true&seed=${Math.random()}`;
+                document.querySelectorAll('.section-wrapper').forEach(section => {
+                    observer.observe(section);
+                });
+            }
 
-            // Asignamos la URL a la imagen
-            generatedImage.src = imageUrl;
+            // 2. BÚSQUEDA DEL ARCHIVO
+            initSearch() {
+                const searchInput = document.getElementById("searchInput");
+                const cards = document.querySelectorAll("#styleGrid .card");
 
-            // Esperamos a que la imagen cargue realmente en el navegador
-            generatedImage.onload = function() {
-                statusText.innerHTML = `<strong>Visión revelada:</strong><br>Diseño de "${concept}"`;
-                generatedImage.style.display = "inline-block";
-                generateBtn.disabled = false;
-                generateBtn.innerText = "Generar Diseño Real";
-            };
+                if(!searchInput) return;
 
-            // En caso de que la API falle
-            generatedImage.onerror = function() {
-                statusText.innerHTML = "Hubo una perturbación en la energía. Por favor intenta de nuevo.";
-                generateBtn.disabled = false;
-                generateBtn.innerText = "Generar Diseño Real";
-            };
+                searchInput.addEventListener("input", (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    cards.forEach(card => {
+                        const keywords = card.getAttribute("data-key").toLowerCase();
+                        if (keywords.includes(query)) {
+                            card.style.display = "block";
+                            setTimeout(() => card.style.opacity = "1", 10);
+                        } else {
+                            card.style.opacity = "0";
+                            setTimeout(() => card.style.display = "none", 400);
+                        }
+                    });
+                });
+            }
+
+            // 3. GENERADOR DE HASH ÚNICO OBLIGATORIO
+            generateHash() {
+                const chars = '0123456789ABCDEF';
+                let hash = '0x';
+                for (let i = 0; i < 12; i++) {
+                    hash += chars[Math.floor(Math.random() * chars.length)];
+                }
+                return `L-ID::${hash}`;
+            }
+
+            // 4. MOTOR GENERATIVO EXPANDIDO
+            initEngine() {
+                const btn = document.getElementById("generateBtn");
+                const resultBox = document.getElementById("engineResult");
+                const status = document.getElementById("statusText");
+                const img = document.getElementById("generatedImage");
+                const concept = document.getElementById("engineConcept");
+                const style = document.getElementById("engineStyle");
+                const hashDisplay = document.getElementById("hashIdDisplay");
+
+                if(!btn) return;
+
+                btn.addEventListener("click", () => {
+                    const val = concept.value.trim();
+                    if (!val) {
+                        resultBox.style.display = "block";
+                        status.innerHTML = "> ERROR: CONCEPTO VACÍO. INGRESE PARÁMETRO.";
+                        img.style.display = "none";
+                        return;
+                    }
+
+                    resultBox.style.display = "block";
+                    status.innerHTML = "> PROCESANDO LENGUAJE ANCESTRAL... SINTETIZANDO VISIÓN.";
+                    hashDisplay.innerText = "LINEAGE-ID: [ CALCULANDO... ]";
+                    img.style.display = "none";
+                    btn.disabled = true;
+                    btn.innerText = "SINTETIZANDO...";
+
+                    const aestheticConstraint = "black and white, monochrome, brutalist minimalist, pure white background";
+                    const fullPrompt = encodeURIComponent(`Tattoo design of ${val}, ${style.value}, ${aestheticConstraint}`);
+                    const imageUrl = `https://image.pollinations.ai/prompt/${fullPrompt}?width=512&height=512&nologo=true&seed=${Math.floor(Math.random() * 10000)}`;
+
+                    img.src = imageUrl;
+
+                    img.onload = () => {
+                        const newHash = this.generateHash();
+                        hashDisplay.innerText = newHash;
+                        status.innerHTML = `> EXTRACCIÓN EXITOSA.<br>> CONCEPTO: ${val.toUpperCase()}`;
+                        img.style.display = "block";
+                        btn.disabled = false;
+                        btn.innerText = "EJECUTAR NUEVO CÓDIGO";
+                    };
+
+                    img.onerror = () => {
+                        status.innerHTML = "> ERROR DE SINCRONIZACIÓN CON EL ORÁCULO. REINTENTE.";
+                        btn.disabled = false;
+                        btn.innerText = "REINTENTAR CÓDIGO";
+                    };
+                });
+            }
+
+            // 5. SISTEMA VIP
+            initVipSystem() {
+                const vipCode = document.getElementById("vipCode");
+                const vipBtn = document.getElementById("vipBtn");
+                const vipContent = document.getElementById("vipContent");
+
+                if(!vipBtn) return;
+
+                vipBtn.addEventListener("click", () => {
+                    if (vipCode.value.trim().toUpperCase() === "OBSIDIANA2026") {
+                        vipContent.style.display = "block";
+                        vipBtn.style.display = "none";
+                        vipCode.style.display = "none";
+                    } else {
+                        vipCode.style.borderColor = "red";
+                        vipCode.value = "";
+                        vipCode.placeholder = "CÓDIGO INVÁLIDO";
+                    }
+                });
+            }
+        }
+
+        // Inicializar Sistema en el DOM
+        document.addEventListener("DOMContentLoaded", () => {
+            new LineAgeSystem();
         });
     </script>
-
 </body>
 </html>
