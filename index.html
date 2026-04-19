@@ -3,359 +3,63 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LINEAGE — ARQUITECTURA DIGITAL ∞</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <title>LineAge — Arquitectura de Memoria</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-
-    <style>
-        :root {
-            --black-deep: #050505;
-            --gray-charcoal: #111111;
-            --gray-stone: #2a2a2a;
-            --gray-fog: #b0b0b0;
-            --white-bone: #f5f5f5;
-            --accent-obsidian: #3a0ca3; /* Sutil energía púrpura oscura para VIP */
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--black-deep);
-            color: var(--gray-fog);
-            overflow: hidden; /* Controlado por el sistema de pestañas */
-            cursor: none; /* El cursor es reemplazado por el sistema de seguimiento */
-        }
-
-        /* =======================
-           CURSADOR INNOVADOR (ENERGÍA)
-        ======================= */
-        #custom-cursor {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--white-bone);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
-
-        #cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--gray-stone);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.1s ease-out;
-        }
-
-        /* =======================
-           SISTEMA DE FONDO DINÁMICO
-        ======================= */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-        /* =======================
-           NAVEGACIÓN POR PESTAÑAS (SEGMENTACIÓN)
-        ======================= */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 80px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid var(--gray-stone);
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .nav-item {
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            margin: 20px 0;
-            padding: 10px;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--gray-stone);
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-        .nav-item.active { color: var(--white-bone); border-left: 2px solid var(--white-bone); }
-
-        /* =======================
-           CONTENEDORES DE PESTAÑAS
-        ======================= */
-        .page-content {
-            margin-left: 80px;
-            height: 100vh;
-            width: calc(100vw - 80px);
-            position: relative;
-            overflow-y: auto;
-            display: none; /* Por defecto ocultas */
-            padding: 60px;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .page-content.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-
-        /* =======================
-           SECCIÓN VIP (PASARELA DE PAGO)
-        ======================= */
-        .vip-vault {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            border: 1px solid var(--gray-stone);
-            padding: 60px;
-            background: linear-gradient(135deg, #050505 0%, #0a0a0a 100%);
-        }
-
-        .price-tag {
-            font-size: 4rem;
-            font-family: 'Playfair Display', serif;
-            color: var(--white-bone);
-            margin: 20px 0;
-        }
-
-        .payment-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .pay-btn {
-            padding: 20px;
-            border: 1px solid var(--gray-stone);
-            background: transparent;
-            color: var(--white-bone);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .pay-btn:hover { background: var(--white-bone); color: var(--black-deep); }
-        .pay-btn span { font-size: 10px; margin-top: 5px; opacity: 0.7; }
-
-        /* Estilos motor generativo anterior mantenidos y mejorados */
-        #canvas3D { width: 100%; height: 400px; border: 1px solid var(--gray-stone); margin-top: 20px; }
-        .engine-ui { max-width: 700px; margin: 0 auto; }
-        input, select { 
-            width: 100%; padding: 20px; background: var(--gray-charcoal); 
-            border: 1px solid var(--gray-stone); color: var(--white-bone); margin-bottom: 20px;
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div id="custom-cursor"></div>
-    <div id="cursor-follower"></div>
-    <canvas id="bg-canvas"></canvas>
+    <div id="loader"><span>INICIANDO RITUAL...</span></div>
+    <div id="cursor"></div>
+    <div id="cursor-aura"></div>
+    <canvas id="canvas-bg"></canvas>
 
     <nav>
-        <div class="nav-item active" onclick="app.switchTab('home')">Inicio</div>
-        <div class="nav-item" onclick="app.switchTab('archivo')">Archivo</div>
-        <div class="nav-item" onclick="app.switchTab('engine')">Motor</div>
-        <div class="nav-item" onclick="app.switchTab('vip')">VIP</div>
+        <div class="nav-brand">LINEAGE</div>
+        <div class="nav-menu">
+            <button class="nav-btn active" data-section="home">Inicio</button>
+            <button class="nav-btn" data-section="engine">Motor IA</button>
+            <button class="nav-btn" data-section="vip">Acceso VIP</button>
+        </div>
     </nav>
 
-    <div id="home" class="page-content active">
-        <div style="height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <h2 style="letter-spacing: 15px; text-transform: uppercase; font-size: 12px;">Arquitectura</h2>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 8vw; color: var(--white-bone);">LINEAGE</h1>
-            <p style="max-width: 500px; text-align: center; letter-spacing: 2px;">El sistema de diseño de tatuajes basado en el legado megalítico de San Agustín.</p>
-        </div>
-    </div>
-
-    <div id="archivo" class="page-content">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 40px; color: var(--white-bone);">Archivo Monolítico</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-            <div class="card" style="border: 1px solid var(--gray-stone); padding: 20px;">
-                <img src="https://images.unsplash.com/photo-1604085572504-a392ddf0d86c" width="100%" style="filter: grayscale(1);">
-                <h3 style="margin-top: 15px;">Ancestral San Agustín</h3>
-                <p style="font-size: 12px; margin-top: 10px;">Interpretación de las deidades grabadas en piedra.</p>
+    <main>
+        <section id="home" class="view active">
+            <div class="hero">
+                <h1 class="glitch">MEMORIA ETERNA</h1>
+                <p>Sintetizando el legado megalítico en la piel contemporánea.</p>
             </div>
+        </section>
+
+        <section id="engine" class="view">
+            <div class="engine-card">
+                <h2>Generador de Linaje</h2>
+                <div class="input-group">
+                    <input type="text" id="promptInput" placeholder="Describe tu visión ancestral...">
+                    <button id="btnGenerate">SINTETIZAR</button>
+                </div>
+                <div id="visualizer-3d">
+                    </div>
             </div>
-    </div>
+        </section>
 
-    <div id="engine" class="page-content">
-        <div class="engine-ui">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 30px; color: var(--white-bone);">Motor Generativo ∞</h2>
-            <input type="text" id="engineConcept" placeholder="Dictar o escribir concepto ancestral...">
-            <select id="engineStyle">
-                <option value="Stone texture tattoo, San Agustin megalithic style, black ink">Piedra Megalítica</option>
-                <option value="Sacred geometry, thin lines, symmetrical">Geometría Sagrada</option>
-            </select>
-            <button onclick="app.generateTattoo()" style="width: 100%; padding: 20px; background: var(--white-bone); border: none; font-weight: bold; cursor: pointer;">SINTETIZAR MEMORIA</button>
-            
-            <div id="engineResult" style="margin-top: 30px; display: none;">
-                <div id="canvas3D"></div>
-                <div id="hashId" style="font-family: monospace; font-size: 10px; margin-top: 10px;"></div>
+        <section id="vip" class="view">
+            <div class="vip-portal">
+                <span class="badge">NIVEL OBSIDIANA</span>
+                <h2>Afiliación Arqueológica</h2>
+                <p class="price">$5.00 <span>USD</span></p>
+                <div class="pay-grid">
+                    <button class="pay-btn digital">PAGO DIGITAL</button>
+                    <a href="https://wa.me/573000000000?text=ACCESO_VIP" class="pay-btn wa">WHATSAPP DIRECTO</a>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <div id="vip" class="page-content">
-        <div class="vip-vault">
-            <h3 style="letter-spacing: 5px; color: var(--white-bone);">ACCESO NIVEL OBSIDIANA</h3>
-            <p style="margin-top: 10px;">Afiliación para diseños de alta fidelidad y archivo restringido.</p>
-            <div class="price-tag">$5.00</div>
-            
-            <div class="payment-options">
-                <button class="pay-btn" onclick="alert('Conectando con pasarela Stripe/Crypto...')">
-                    TARJETA / CRYPTO
-                    <span>Procesamiento inmediato</span>
-                </button>
-                <a href="https://wa.me/573000000000?text=Hola,%20quiero%20mi%20acceso%20VIP%20Obsidiana%20para%20LineAge" target="_blank" class="pay-btn">
-                    WHATSAPP
-                    <span>Validación manual (Hablado)</span>
-                </a>
-            </div>
-            
-            <p style="margin-top: 30px; font-size: 10px; color: var(--gray-stone);">* El acceso VIP es vitalicio e incluye 10 generaciones premium mensuales.</p>
-        </div>
-    </div>
-
-    <script>
-        /**
-         * LINEAGE SYSTEM V4.0
-         */
-        class LineageApp {
-            constructor() {
-                this.initCursor();
-                this.initBackground();
-                this.currentTab = 'home';
-                
-                // Three.js State
-                this.scene = null;
-                this.camera = null;
-                this.renderer = null;
-            }
-
-            // 1. SEGUIMIENTO DE CURSOR (INNOVACIÓN)
-            initCursor() {
-                const cursor = document.getElementById('custom-cursor');
-                const follower = document.getElementById('cursor-follower');
-                
-                window.addEventListener('mousemove', (e) => {
-                    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0 });
-                    gsap.to(follower, { x: e.clientX - 16, y: e.clientY - 16, duration: 0.3 });
-                });
-            }
-
-            // 2. FONDO DE PARTÍCULAS (MOVIMIENTO NEGRO PROFUNDO)
-            initBackground() {
-                const canvas = document.getElementById('bg-canvas');
-                const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.z = 5;
-
-                const particlesCount = 1500;
-                const posArray = new Float32Array(particlesCount * 3);
-                for(let i=0; i < particlesCount * 3; i++) {
-                    posArray[i] = (Math.random() - 0.5) * 10;
-                }
-
-                const geometry = new THREE.BufferGeometry();
-                geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-                const material = new THREE.PointsMaterial({ size: 0.005, color: 0xffffff });
-                const particlesMesh = new THREE.Points(geometry, material);
-                scene.add(particlesMesh);
-
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    particlesMesh.rotation.y += 0.001;
-                    renderer.render(scene, camera);
-                };
-                animate();
-
-                window.addEventListener('resize', () => {
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                });
-            }
-
-            // 3. CAMBIO DE PESTAÑAS (SPA)
-            switchTab(tabId) {
-                document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-                
-                document.getElementById(tabId).classList.add('active');
-                event.currentTarget.classList.add('active');
-                this.currentTab = tabId;
-            }
-
-            // 4. MOTOR GENERATIVO (THREE.JS INTEGRADO)
-            generateTattoo() {
-                const concept = document.getElementById('engineConcept').value;
-                const result = document.getElementById('engineResult');
-                result.style.display = 'block';
-                
-                const hashId = document.getElementById('hashId');
-                hashId.innerText = 'GENERANDO LINEAGE-ID: 0x' + Math.random().toString(16).slice(2, 10).toUpperCase();
-
-                // Simulación de carga y render 3D
-                this.init3DRender('https://image.pollinations.ai/prompt/' + encodeURIComponent(concept) + '?nologo=true');
-            }
-
-            init3DRender(url) {
-                const container = document.getElementById('canvas3D');
-                container.innerHTML = '';
-                
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                renderer.setSize(container.clientWidth, container.clientHeight);
-                container.appendChild(renderer.domElement);
-
-                const geometry = new THREE.BoxGeometry(2, 3, 0.5);
-                const texture = new THREE.TextureLoader().load(url);
-                const material = new THREE.MeshBasicMaterial({ map: texture });
-                const monolith = new THREE.Mesh(geometry, material);
-                scene.add(monolith);
-
-                camera.position.z = 5;
-
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    monolith.rotation.y += 0.01;
-                    renderer.render(scene, camera);
-                };
-                animate();
-            }
-        }
-
-        const app = new LineageApp();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
