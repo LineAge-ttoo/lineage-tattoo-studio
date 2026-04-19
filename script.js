@@ -1,104 +1,124 @@
-class LineageApp {
+class LineageEngine {
     constructor() {
-        this.initLoader();
         this.initCursor();
-        this.initBackground();
+        this.initSanAgustinFlow(); // El fondo místico
         this.initNavigation();
-        this.initIAEngine();
+        this.initGenerator();
     }
 
-    initLoader() {
-        window.onload = () => {
-            const loader = document.getElementById('loader');
-            if(loader) {
-                loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 1000);
-            }
-        };
-    }
-
+    // 1. Movimiento del Cursor con Inercia
     initCursor() {
-        const aura = document.getElementById('cursor-aura');
         const dot = document.getElementById('cursor');
+        const aura = document.getElementById('cursor-aura');
+        
         window.addEventListener('mousemove', (e) => {
+            // GSAP crea ese movimiento suave y lujoso
             gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.1 });
-            gsap.to(aura, { x: e.clientX - 15, y: e.clientY - 15, duration: 0.5 });
-        });
-    }
-
-    initBackground() {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-bg'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        const geo = new THREE.BufferGeometry();
-        const vertices = [];
-        for (let i = 0; i < 3000; i++) {
-            vertices.push(THREE.MathUtils.randFloatSpread(10));
-            vertices.push(THREE.MathUtils.randFloatSpread(10));
-            vertices.push(THREE.MathUtils.randFloatSpread(10));
-        }
-        geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const mat = new THREE.PointsMaterial({ color: 0x444444, size: 0.015 });
-        const points = new THREE.Points(geo, mat);
-        scene.add(points);
-
-        camera.position.z = 5;
-        const anim = () => {
-            requestAnimationFrame(anim);
-            points.rotation.y += 0.0005;
-            renderer.render(scene, camera);
-        };
-        anim();
-    }
-
-    initNavigation() {
-        const btns = document.querySelectorAll('.nav-btn');
-        const views = document.querySelectorAll('.view');
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-section');
-                btns.forEach(b => b.classList.remove('active'));
-                views.forEach(v => v.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(target).classList.add('active');
+            gsap.to(aura, { 
+                x: e.clientX - 25, 
+                y: e.clientY - 25, 
+                duration: 0.8, 
+                ease: "power3.out" 
             });
         });
     }
 
-    initIAEngine() {
-        const btn = document.getElementById('btnGenerate');
-        btn.addEventListener('click', () => {
-            const prompt = document.getElementById('promptInput').value;
-            if(!prompt) return;
-            btn.innerText = "SINTETIZANDO...";
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + " stone tattoo black and white")}?nologo=true`;
-            this.update3D(url);
-            btn.innerText = "SINTETIZAR";
+    // 2. Fondo de Partículas "Polvo de Piedra" (Three.js)
+    initSanAgustinFlow() {
+        const canvas = document.getElementById('canvas-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // Geometría de las partículas (Simulando micro-fragmentos)
+        const particlesGeo = new THREE.BufferGeometry();
+        const count = 3500;
+        const posArray = new Float32Array(count * 3);
+
+        for(let i = 0; i < count * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 12;
+        }
+
+        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Material de las partículas: Color hueso con transparencia
+        const particlesMat = new THREE.PointsMaterial({
+            size: 0.008,
+            color: 0xf2f2f2,
+            transparent: true,
+            opacity: 0.4,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+        scene.add(particlesMesh);
+
+        camera.position.z = 4;
+
+        // Animación de rotación lenta (Como si el aire se moviera en una tumba)
+        const animate = () => {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.y += 0.0004;
+            particlesMesh.rotation.x += 0.0002;
+            
+            // Hacer que las partículas sigan sutilmente al mouse
+            window.addEventListener('mousemove', (e) => {
+                const mouseX = (e.clientX / window.innerWidth) - 0.5;
+                const mouseY = (e.clientY / window.innerHeight) - 0.5;
+                gsap.to(particlesMesh.rotation, {
+                    y: mouseX * 0.1,
+                    x: mouseY * 0.1,
+                    duration: 2
+                });
+            });
+
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     }
 
-    update3D(imgUrl) {
-        const container = document.getElementById('visualizer-3d');
-        container.innerHTML = '';
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
+    // 3. Sistema de Navegación entre Secciones
+    initNavigation() {
+        const buttons = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('.view');
 
-        const loader = new THREE.TextureLoader();
-        loader.crossOrigin = "anonymous";
-        loader.load(imgUrl, (tex) => {
-            const mesh = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 3, 32), new THREE.MeshStandardMaterial({ map: tex }));
-            scene.add(mesh);
-            scene.add(new THREE.PointLight(0xffffff, 1, 100).clone().set(5,5,5));
-            scene.add(new THREE.AmbientLight(0x333333));
-            camera.position.z = 4;
-            const rotate = () => { requestAnimationFrame(rotate); mesh.rotation.y += 0.01; renderer.render(scene, camera); };
-            rotate();
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-section');
+                
+                // Animación de salida
+                gsap.to('.view.active', { opacity: 0, y: 10, duration: 0.3, onComplete: () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    btn.classList.add('active');
+                    const targetSection = document.getElementById(target);
+                    targetSection.classList.add('active');
+                    
+                    // Animación de entrada
+                    gsap.fromTo(targetSection, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.5 });
+                }});
+            });
         });
+    }
+
+    // 4. Motor Generativo de "Tótems"
+    initGenerator() {
+        // Aquí conectaremos la lógica de la IA en el futuro cercano
+        console.log("Motor LineAge listo para recibir prompts de San Agustín.");
     }
 }
-new LineageApp();
+
+// Inicialización cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new LineageEngine();
+});
