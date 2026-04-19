@@ -3,40 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LineAge — Herencia de San Agustín</title>
+    <title>LineAge — Sistema de Diseño Ancestral</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-    <div class="fog-layer"></div> <div id="cursor"></div>
+    <div id="loader"><span>SINTETIZANDO LEGADO...</span></div>
+    
+    <div class="fog-container">
+        <div class="fog-layer layer-1"></div>
+        <div class="fog-layer layer-2"></div>
+    </div>
+    <div class="texture-overlay"></div>
+    <div class="vignette-ritual"></div>
+    
+    <div id="cursor"></div>
     <div id="cursor-aura"></div>
     <canvas id="canvas-bg"></canvas>
 
     <nav>
-        <div class="nav-brand" style="letter-spacing: 5px;">LINEAGE</div>
+        <div class="nav-brand">LINEAGE <span class="v-tag">v2.0</span></div>
         <div class="nav-menu">
             <button class="nav-btn active" data-section="home">Legado</button>
             <button class="nav-btn" data-section="engine">El Templo</button>
-            <button class="nav-btn" data-section="vip">Ofrenda VIP</button>
+            <button class="nav-btn" data-section="vip">Ofrenda</button>
         </div>
     </nav>
 
     <main>
         <section id="home" class="view active">
-            <div class="content">
+            <div class="hero-content">
+                <h2 class="pre-title">ARCHAEOLOGICAL RITUAL SYSTEM</h2>
                 <h1 class="main-title">LINEAGE</h1>
-                <p style="letter-spacing: 5px; color: #888; text-align: center; margin-top: -20px;">ESTUDIO ARQUEOLÓGICO DIGITAL</p>
+                <div class="separator-gold"></div>
+                <p class="tagline">La memoria de San Agustín tallada en el tiempo de la piel.</p>
             </div>
         </section>
         
         <section id="engine" class="view">
-            </section>
+            <div class="engine-layout">
+                <div class="engine-ui">
+                    <h2 class="section-title">Generador de Tótem</h2>
+                    <p class="engine-desc">Dicta tu intención al monolito.</p>
+                    <div class="input-wrapper">
+                        <input type="text" id="promptInput" placeholder="Ej: Jaguar de luz, Guerrero de piedra...">
+                        <button id="btnGenerate">SINTETIZAR ADN</button>
+                    </div>
+                    
+                    <div id="narrative-box" class="hidden">
+                        <h3>SIGNIFICADO RITUAL</h3>
+                        <p id="story-text"></p>
+                    </div>
+                </div>
+                
+                <div id="visualizer-container">
+                    <div id="visualizer-3d"></div>
+                    <div class="meta-data">
+                        <span id="gen-id">0x000000</span>
+                        <span id="gen-status">READY</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="vip" class="view">
-            </section>
+            <div class="vip-card">
+                <span class="gold-badge">NIVEL OBSIDIANA</span>
+                <h2 class="section-title">Acceso al Archivo Sagrado</h2>
+                <p class="price">$5.00 <span>USD</span></p>
+                <div class="payment-grid">
+                    <button class="pay-btn main-p">INICIAR AFILIACIÓN</button>
+                    <a href="https://wa.me/573000000000?text=ACCESO_LINEAGE_VIP" class="pay-btn wa">CONTACTO DIRECTO</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
