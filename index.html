@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LINEAGE TATTOO STUDIO — ANCESTRAL SYSTEM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0a0a0a;
+    --bg2:#111;
+    --fg:#f2f2f2;
+    --muted:#9a9a9a;
+    --line:rgba(255,255,255,0.08);
+    --accent:#ffffff;
+    --shadow:rgba(0,0,0,0.6);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background: radial-gradient(circle at top, #1a1a1a, #050505 60%, #000);
+    color:var(--fg);
+    overflow-x:hidden;
+}
+
+/* BACKGROUND TEXTURE ANCESTRAL */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity:0.06;
+    pointer-events:none;
+}
+
+/* NAV */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    z-index:1000;
+}
+
+nav h1{
+    font-family:Playfair Display;
+    letter-spacing:4px;
+    font-weight:600;
+}
+
+nav a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:20px;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,8rem);
+    font-family:Playfair Display;
+    letter-spacing:2px;
+}
+
+.hero p{
+    max-width:600px;
+    color:var(--muted);
+    margin-top:20px;
+    line-height:1.6;
+}
+
+/* SECTIONS */
+section{
+    padding:120px 10%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.title{
+    font-size:2rem;
+    margin-bottom:40px;
+    font-family:Playfair Display;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+/* CARD STYLE */
+.card{
+    background:linear-gradient(145deg,#111,#0a0a0a);
+    border:1px solid var(--line);
+    padding:20px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#fff;
+}
+
+/* STYLE IMAGE */
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:8px;
+    filter:grayscale(100%);
+}
+
+/* BUTTON */
+button{
+    background:#fff;
+    color:#000;
+    border:none;
+    padding:12px 18px;
+    margin-top:10px;
+    cursor:pointer;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+button:hover{
+    opacity:0.8;
+}
+
+/* INPUT */
+input,select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background:#111;
+    border:1px solid var(--line);
+    color:#fff;
+}
+
+/* HISTORY */
+.history{
+    background:linear-gradient(180deg,#0a0a0a,#050505);
+    border-left:2px solid #fff;
+    padding:20px;
+    line-height:1.8;
+    color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:40px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h1>LINEAGE</h1>
+<div>
+<a href="#styles">Estilos</a>
+<a href="#engine">Engine</a>
+<a href="#history">Historia</a>
+</div>
+</nav>
+
+<header class="hero">
+<h1>LINEAGE</h1>
+<p>
+Sistema internacional de tatuaje inspirado en la cultura ancestral de San Agustín Huila.
+Geometría, memoria pétrea y arte sobre piel.
+</p>
+</header>
+
+<!-- ESTILOS -->
+<section id="styles">
+<h2 class="title">Estilos de Tatuaje</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1608666311620-9f0d2d7b2f1b" />
+<h3>Geometría Sagrada</h3>
+<p>Líneas limpias, estructuras ancestrales, equilibrio simbólico.</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874" />
+<h3>Stone Ancestral</h3>
+<p>Inspirado en esculturas de San Agustín, textura pétrea.</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e" />
+<h3>Blackwork</h3>
+<p>Contraste profundo, identidad fuerte, minimalismo oscuro.</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1621600411688-4be93c5e3c3e" />
+<h3>Flow Orgánico</h3>
+<p>Movimiento natural inspirado en energía y territorio andino.</p>
+</div>
+
+</div>
+</section>
+
+<!-- ENGINE -->
+<section id="engine">
+<h2 class="title">Generative Engine</h2>
+
+<input placeholder="Ingresa tu concepto (energía, símbolo, idea)"/>
+<select>
+<option>Geometría Sagrada</option>
+<option>Piedra Ancestral</option>
+<option>Flujo Orgánico</option>
+<option>Minimal Black</option>
+</select>
+
+<button>Generar Diseño</button>
+
+<div class="card" style="margin-top:20px">
+<p>Resultado IA simulado:</p>
+<p style="color:#fff">HASH-LINEAGE-9F3X-2026</p>
+</div>
+</section>
+
+<!-- HISTORIA -->
+<section id="history">
+<h2 class="title">Historia de San Agustín</h2>
+
+<div class="history">
+San Agustín, en el corazón del Huila colombiano, guarda una memoria tallada en piedra.  
+Sus esculturas ancestrales no son simples formas: son guardianes de un lenguaje perdido.
+
+Cada figura representa una conexión entre lo humano, lo espiritual y la tierra.  
+En LineAge reinterpretamos ese legado, transformándolo en trazos vivos sobre la piel.
+
+El tatuaje aquí no es decoración: es continuidad cultural.
+Es memoria que respira.
+</div>
+</section>
+
+<footer>
+LINEAGE TATTOO STUDIO — ANCESTRAL SYSTEM © 2026
+</footer>
+
+</body>
+</html>
