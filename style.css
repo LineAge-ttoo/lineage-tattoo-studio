@@ -1,31 +1,98 @@
 :root {
-    --bg: #050505;
-    --accent: #f5f5f5;
-    --glass: rgba(255, 255, 255, 0.03);
+    --bg-dark: #030303;
+    --stone-gray: #1a1a1b;
+    --accent-gold: #c5a059; /* Un toque de oro ancestral */
+    --white-bone: #f2f2f2;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--accent); font-family: 'Inter', sans-serif; overflow: hidden; cursor: none; }
 
-#loader { position: fixed; inset: 0; background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 1s; font-size: 10px; letter-spacing: 5px; }
+body {
+    background-color: var(--bg-dark);
+    /* Fondo con degradado que simula una linterna en la oscuridad */
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(26, 26, 27, 0.8) 0%, rgba(3, 3, 3, 1) 80%),
+        url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Textura de grano fino */
+    color: var(--white-bone);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    cursor: none;
+}
 
-#cursor { position: fixed; width: 5px; height: 5px; background: white; border-radius: 50%; pointer-events: none; z-index: 9999; }
-#cursor-aura { position: fixed; width: 35px; height: 35px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; pointer-events: none; z-index: 9998; }
+/* Efecto de Niebla en movimiento (San Agustín místico) */
+.fog-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 200%; height: 100%;
+    background: url('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/terrain/grasslight-big.jpg');
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    animation: drift 60s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
 
-#canvas-bg { position: fixed; inset: 0; z-index: -1; }
+@keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
 
-nav { position: fixed; top: 0; width: 100%; padding: 30px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
-.nav-brand { font-family: 'Playfair Display'; font-weight: bold; letter-spacing: 5px; }
-.nav-btn { background: none; border: none; color: #555; margin-left: 20px; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
-.nav-btn.active { color: white; }
+/* Cursor mejorado (Representa un hallazgo de luz) */
+#cursor {
+    position: fixed;
+    width: 4px; height: 4px;
+    background: var(--white-bone);
+    border-radius: 50%;
+    z-index: 10000;
+    pointer-events: none;
+}
 
-.view { display: none; height: 100vh; padding: 120px 50px; flex-direction: column; align-items: center; }
-.view.active { display: flex; animation: fadeIn 1s forwards; }
+#cursor-aura {
+    position: fixed;
+    width: 50px; height: 50px;
+    border: 1px solid rgba(197, 160, 89, 0.3); /* Color oro tenue */
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
 
-.engine-card, .vip-portal { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); padding: 50px; width: 100%; max-width: 600px; text-align: center; }
-#visualizer-3d { width: 100%; height: 300px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); }
+/* Tipografía de Lujo */
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 12vw, 9rem);
+    font-weight: 700;
+    letter-spacing: 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #fff 30%, #444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
 
-input { width: 80%; padding: 15px; background: transparent; border: none; border-bottom: 1px solid #333; color: white; outline: none; margin-bottom: 20px; }
-button { padding: 15px 30px; background: white; color: black; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 10px; }
+/* Estilo de los botones de navegación */
+nav {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.nav-btn {
+    background: none;
+    border: none;
+    color: #666;
+    letter-spacing: 3px;
+    font-size: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.nav-btn.active {
+    color: var(--accent-gold);
+    border-bottom: 1px solid var(--accent-gold);
+}
