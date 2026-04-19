@@ -1,55 +1,56 @@
 :root {
-    --bg: #020202;
+    --bg: #030303;
     --gold: #c5a059;
-    --gold-dim: #5c4b2a;
-    --white: #f5f5f5;
-    --gray: #444;
+    --white: #ffffff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow: hidden; cursor: none; }
 
-/* Niebla Cinemática Mejorada */
-.fog-container { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.fog-layer { position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%); }
-.layer-1 { animation: fogFloat 120s linear infinite; top: -50%; left: -50%; }
-.layer-2 { animation: fogFloat 90s linear infinite reverse; opacity: 0.03; top: 0; }
-@keyframes fogFloat { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-10%, -10%) rotate(5deg); } }
+body { 
+    background-color: var(--bg); 
+    color: var(--white); 
+    font-family: 'Inter', sans-serif; 
+    overflow: hidden;
+    cursor: none; 
+}
 
-.vignette-ritual { position: fixed; inset: 0; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: 3; pointer-events: none; }
-.texture-overlay { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'); opacity: 0.1; z-index: 2; pointer-events: none; }
+/* Fondo y Atmósfera */
+#canvas-bg { position: fixed; inset: 0; z-index: -1; }
 
-/* Cursor con Aura de Oro */
-#cursor { position: fixed; width: 4px; height: 4px; background: #fff; border-radius: 50%; z-index: 9999; pointer-events: none; }
-#cursor-aura { position: fixed; width: 40px; height: 40px; border: 1px solid var(--gold-dim); border-radius: 50%; z-index: 9998; pointer-events: none; transition: transform 0.1s ease; }
+.fog-container {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.8));
+    pointer-events: none;
+}
 
-/* UI de Navegación */
-nav { position: fixed; top: 0; width: 100%; padding: 40px; display: flex; justify-content: space-between; z-index: 100; align-items: center; }
-.nav-brand { font-family: 'Playfair Display'; letter-spacing: 6px; font-weight: bold; }
-.v-tag { font-size: 8px; vertical-align: super; color: var(--gold); }
-.nav-btn { background: none; border: none; color: var(--gray); margin-left: 20px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; }
-.nav-btn.active { color: var(--white); border-bottom: 1px solid var(--gold); }
+/* Loader Pro */
+#loader {
+    position: fixed; inset: 0; background: #000;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 10000; transition: opacity 1s ease;
+    font-size: 10px; letter-spacing: 5px;
+}
 
-/* Vistas */
-.view { display: none; height: 100vh; width: 100%; justify-content: center; align-items: center; z-index: 10; padding: 40px; }
-.view.active { display: flex; animation: viewIn 1.5s ease; }
-@keyframes viewIn { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
+/* Cursor */
+#cursor { position: fixed; width: 5px; height: 5px; background: #fff; border-radius: 50%; z-index: 9999; pointer-events: none; }
+#cursor-aura { position: fixed; width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%; z-index: 9998; pointer-events: none; }
 
-/* Hero */
-.main-title { font-family: 'Playfair Display'; font-size: clamp(3rem, 10vw, 8rem); letter-spacing: 15px; background: linear-gradient(to bottom, #fff, #333); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.separator-gold { width: 60px; height: 1px; background: var(--gold); margin: 25px auto; }
+/* Tipografía y UI */
+nav { position: fixed; top: 0; width: 100%; padding: 30px; display: flex; justify-content: space-between; z-index: 100; }
+.nav-brand { font-family: 'Playfair Display'; letter-spacing: 5px; font-weight: bold; }
+.nav-btn { background: none; border: none; color: #555; margin-left: 20px; font-size: 10px; letter-spacing: 2px; cursor: pointer; }
+.nav-btn.active { color: #fff; border-bottom: 1px solid var(--gold); }
 
-/* Engine Layout Modular */
-.engine-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; width: 100%; align-items: center; }
-.engine-ui { text-align: left; }
-#visualizer-3d { width: 100%; height: 450px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); }
+.view { display: none; height: 100vh; width: 100%; justify-content: center; align-items: center; padding: 20px; text-align: center; }
+.view.active { display: flex; animation: fadeIn 1s forwards; }
 
-/* Narrativa */
-#narrative-box { margin-top: 30px; border-left: 1px solid var(--gold); padding-left: 20px; text-align: left; animation: fadeIn 2s ease; }
-#narrative-box h3 { font-size: 10px; letter-spacing: 3px; color: var(--gold); margin-bottom: 10px; }
-#narrative-box p { font-size: 13px; color: #888; line-height: 1.6; font-style: italic; }
+.main-title { font-family: 'Playfair Display'; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: 15px; }
+.separator { width: 40px; height: 1px; background: var(--gold); margin: 20px auto; }
 
-.hidden { display: none; }
-input { background: transparent; border: none; border-bottom: 1px solid var(--gray); padding: 15px 0; color: white; width: 100%; margin-bottom: 25px; outline: none; font-size: 1rem; }
-button { background: var(--white); color: black; border: none; padding: 15px 30px; font-weight: bold; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
-button:hover { background: var(--gold); }
+.engine-card { background: rgba(255,255,255,0.02); padding: 40px; border: 1px solid rgba(255,255,255,0.05); max-width: 600px; width: 100%; }
+#visualizer-3d { width: 100%; height: 300px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); }
+
+input { background: transparent; border: none; border-bottom: 1px solid #333; padding: 10px; color: white; width: 70%; outline: none; margin-bottom: 20px; }
+button { padding: 10px 20px; background: white; color: black; border: none; font-weight: bold; cursor: pointer; font-size: 10px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
